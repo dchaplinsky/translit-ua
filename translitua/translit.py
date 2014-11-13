@@ -69,7 +69,7 @@ FIRST_CHARACTERS = add_uppercase(_FIRST_CHARACTERS)
 SPECIAL_CASES = add_uppercase(_SPECIAL_CASES)
 
 
-def translit_ukr(src):
+def translitua(src):
     """
     """
     pattern1 = re.compile(u"(?mu)" + u'|'.join(re.escape(key)
@@ -82,17 +82,17 @@ def translit_ukr(src):
     src = pattern2.sub(lambda x: FIRST_CHARACTERS[x.group()], src)
     return src.translate(MAIN_TRANSLIT_TABLE)
 
-__all__ = ["translit_ukr"]
+__all__ = ["translitua"]
 
 
 if __name__ == '__main__':
-    print(translit_ukr(u"Дмитро Згуровский"))
-    print(translit_ukr(u"Дмитро ЗГуровский"))
-    print(translit_ukr(u"Дмитро згуровский"))
+    print(translitua(u"Дмитро Згуровский"))
+    print(translitua(u"Дмитро ЗГуровский"))
+    print(translitua(u"Дмитро згуровский"))
 
-    print(translit_ukr(u"Євген Петренко"))
-    print(translit_ukr(u"Петренко Євген"))
-    print(translit_ukr(u"Петренко.Євген"))
-    print(translit_ukr(u"Петренко,Євген"))
-    print(translit_ukr(u"Петренко/Євген"))
-    print(translit_ukr(u"Євгєн"))
+    print(translitua(u"Євген Петренко"))
+    print(translitua(u"Петренко Євген"))
+    print(translitua(u"Петренко.Євген"))
+    print(translitua(u"Петренко,Євген"))
+    print(translitua(u"Петренко/Євген"))
+    print(translitua(u"Євгєн"))

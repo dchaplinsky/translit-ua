@@ -1,1 +1,1 @@
-from .translit import translit_ukr
+from .translit import translitua
