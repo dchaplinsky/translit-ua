@@ -55,13 +55,13 @@ _FIRST_CHARACTERS = {
 def add_uppercase(table):
     orig = table.copy()
     orig.update(
-        dict((k.capitalize(), v.capitalize()) for k, v in table.iteritems()))
+        dict((k.capitalize(), v.capitalize()) for k, v in table.items()))
 
     return orig
 
 
 def convert_table(table):
-    return dict((ord(k), v) for k, v in table.iteritems())
+    return dict((ord(k), v) for k, v in table.items())
 
 
 MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
