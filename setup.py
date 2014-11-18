@@ -1,3 +1,6 @@
+
+import translitua
+
 from setuptools import setup
 from codecs import open
 from os import path
@@ -10,7 +13,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 setup(
     name='translitua',
 
-    version='1.0.0b1',
+    version=translitua.__version__,
 
     description='Transliteration for ukrainian language',
     long_description=long_description,
