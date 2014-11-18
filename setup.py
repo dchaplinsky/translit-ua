@@ -15,7 +15,7 @@ setup(
 
     version=translitua.__version__,
 
-    description='Transliteration for ukrainian language',
+    description='Official transliteration for ukrainian language',
     long_description=long_description,
 
     url='https://github.com/dchaplinsky/translit-ua',
