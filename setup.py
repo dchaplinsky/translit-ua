@@ -21,7 +21,7 @@ setup(
     url='https://github.com/dchaplinsky/translit-ua',
 
     author='dchaplinsky',
-    author_email='dchaplinsky@example.com',
+    author_email='chaplinsky.dmitry@gmail.com',
 
     license='MIT',
 
