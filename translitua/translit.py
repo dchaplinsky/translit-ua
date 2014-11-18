@@ -70,7 +70,8 @@ SPECIAL_CASES = add_uppercase(_SPECIAL_CASES)
 
 
 def translitua(src):
-    """
+    """ Transliterates given ukrainian unicode `src` text
+    to officially transliterated variant
     """
     pattern1 = re.compile(u"(?mu)" + u'|'.join(re.escape(key)
                           for key in SPECIAL_CASES.keys()))
