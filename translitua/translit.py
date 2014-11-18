@@ -55,13 +55,13 @@ _FIRST_CHARACTERS = {
 def add_uppercase(table):
     orig = table.copy()
     orig.update(
-        dict((k.capitalize(), v.capitalize()) for k, v in table.iteritems()))
+        dict((k.capitalize(), v.capitalize()) for k, v in table.items()))
 
     return orig
 
 
 def convert_table(table):
-    return dict((ord(k), v) for k, v in table.iteritems())
+    return dict((ord(k), v) for k, v in table.items())
 
 
 MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -69,8 +69,28 @@ FIRST_CHARACTERS = add_uppercase(_FIRST_CHARACTERS)
 SPECIAL_CASES = add_uppercase(_SPECIAL_CASES)
 
 
-def translit_ukr(src):
-    """
+def translitua(src):
+    u""" Transliterates given ukrainian unicode `src` text
+    to officially transliterated variant.
+
+    >>> print(translitua(u"Дмитро Згуровский"))
+    Dmytro Zghurovskyi
+    >>> print(translitua(u"Дмитро ЗГуровский"))
+    Dmytro ZGhurovskyi
+    >>> print(translitua(u"Дмитро згуровский"))
+    Dmytro zghurovskyi
+    >>> print(translitua(u"Євген Петренко"))
+    Yevhen Petrenko
+    >>> print(translitua(u"Петренко Євген"))
+    Petrenko Yevhen
+    >>> print(translitua(u"Петренко.Євген"))
+    Petrenko.Yevhen
+    >>> print(translitua(u"Петренко,Євген"))
+    Petrenko,Yevhen
+    >>> print(translitua(u"Петренко/Євген"))
+    Petrenko/Yevhen
+    >>> print(translitua(u"Євгєн"))
+    Yevhien
     """
     pattern1 = re.compile(u"(?mu)" + u'|'.join(re.escape(key)
                           for key in SPECIAL_CASES.keys()))
@@ -82,17 +102,9 @@ def translit_ukr(src):
     src = pattern2.sub(lambda x: FIRST_CHARACTERS[x.group()], src)
     return src.translate(MAIN_TRANSLIT_TABLE)
 
-__all__ = ["translit_ukr"]
+__all__ = ["translitua"]
 
 
 if __name__ == '__main__':
-    print(translit_ukr(u"Дмитро Згуровский"))
-    print(translit_ukr(u"Дмитро ЗГуровский"))
-    print(translit_ukr(u"Дмитро згуровский"))
-
-    print(translit_ukr(u"Євген Петренко"))
-    print(translit_ukr(u"Петренко Євген"))
-    print(translit_ukr(u"Петренко.Євген"))
-    print(translit_ukr(u"Петренко,Євген"))
-    print(translit_ukr(u"Петренко/Євген"))
-    print(translit_ukr(u"Євгєн"))
+    import doctest
+    doctest.testmod()
