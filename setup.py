@@ -20,8 +20,8 @@ setup(
 
     url='https://github.com/dchaplinsky/translit-ua',
 
-    author='dchaplinsky',
-    author_email='chaplinsky.dmitry@gmail.com',
+    author='dchaplinsky, enagorny',
+    author_email='chaplinsky.dmitry@gmail.com, ideviantik@gmail.com',
 
     license='MIT',
 
