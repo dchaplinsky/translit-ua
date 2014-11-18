@@ -70,26 +70,26 @@ SPECIAL_CASES = add_uppercase(_SPECIAL_CASES)
 
 
 def translitua(src):
-    """ Transliterates given ukrainian unicode `src` text
+    u""" Transliterates given ukrainian unicode `src` text
     to officially transliterated variant.
 
-    >>> translitua(u"Дмитро Згуровский")
+    >>> print(translitua(u"Дмитро Згуровский"))
     Dmytro Zghurovskyi
-    >>> translitua(u"Дмитро ЗГуровский")
+    >>> print(translitua(u"Дмитро ЗГуровский"))
     Dmytro ZGhurovskyi
-    >>> translitua(u"Дмитро згуровский")
+    >>> print(translitua(u"Дмитро згуровский"))
     Dmytro zghurovskyi
-    >>> translitua(u"Євген Петренко")
+    >>> print(translitua(u"Євген Петренко"))
     Yevhen Petrenko
-    >>> translitua(u"Петренко Євген")
+    >>> print(translitua(u"Петренко Євген"))
     Petrenko Yevhen
-    >>> translitua(u"Петренко.Євген")
+    >>> print(translitua(u"Петренко.Євген"))
     Petrenko.Yevhen
-    >>> translitua(u"Петренко,Євген")
+    >>> print(translitua(u"Петренко,Євген"))
     Petrenko,Yevhen
-    >>> translitua(u"Петренко/Євген")
+    >>> print(translitua(u"Петренко/Євген"))
     Petrenko/Yevhen
-    >>> translitua(u"Євгєн")
+    >>> print(translitua(u"Євгєн"))
     Yevhien
     """
     pattern1 = re.compile(u"(?mu)" + u'|'.join(re.escape(key)
