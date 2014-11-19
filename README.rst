@@ -1,8 +1,8 @@
 translit-ua
 ===========
 
-Transliteration for ukrainian language that uses officialy approved
-rules for python 2.6+ and python 3+
+Transliteration (romanization, latinization) for ukrainian language that uses rules officialy approved
+by The Cabinet. Translit-ua works with python 2.6+ and python 3+ and has doctests.
 
 Installation
 ==================================
