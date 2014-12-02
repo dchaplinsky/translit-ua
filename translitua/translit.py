@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 import re
+import sys
+
+if sys.version < '3':
+    text_type = unicode
+else:
+    text_type = str
 
 _MAIN_TRANSLIT_TABLE = {
     u"а": u"a",
@@ -97,7 +103,7 @@ def translitua(src):
     Yevhien
     """
 
-    src = unicode(src)
+    src = text_type(src)
 
     src = PATTERN1.sub(lambda x: SPECIAL_CASES[x.group()], src)
     src = PATTERN2.sub(lambda x: FIRST_CHARACTERS[x.group()], src)
