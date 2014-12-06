@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 import re
+import sys
+
+if sys.version < '3':
+    text_type = unicode
+else:
+    text_type = str
 
 _MAIN_TRANSLIT_TABLE = {
     u"а": u"a",
@@ -68,6 +74,10 @@ MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 FIRST_CHARACTERS = add_uppercase(_FIRST_CHARACTERS)
 SPECIAL_CASES = add_uppercase(_SPECIAL_CASES)
 
+PATTERN1 = re.compile(u"(?mu)" + u'|'.join(SPECIAL_CASES.keys()))
+PATTERN2 = re.compile(u"(?mu)" + r"\b(" +
+                      u'|'.join(FIRST_CHARACTERS.keys()) + u")")
+
 
 def translitua(src):
     u""" Transliterates given ukrainian unicode `src` text
@@ -92,14 +102,11 @@ def translitua(src):
     >>> print(translitua(u"Євгєн"))
     Yevhien
     """
-    pattern1 = re.compile(u"(?mu)" + u'|'.join(re.escape(key)
-                          for key in SPECIAL_CASES.keys()))
-    src = pattern1.sub(lambda x: SPECIAL_CASES[x.group()], src)
 
-    pattern2 = re.compile(u"(?mu)" + r"\b(" + u'|'.join(re.escape(key)
-                          for key in FIRST_CHARACTERS.keys()) + u")")
+    src = text_type(src)
 
-    src = pattern2.sub(lambda x: FIRST_CHARACTERS[x.group()], src)
+    src = PATTERN1.sub(lambda x: SPECIAL_CASES[x.group()], src)
+    src = PATTERN2.sub(lambda x: FIRST_CHARACTERS[x.group()], src)
     return src.translate(MAIN_TRANSLIT_TABLE)
 
 __all__ = ["translitua"]
