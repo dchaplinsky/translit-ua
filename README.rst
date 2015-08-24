@@ -17,9 +17,9 @@ Usage
 
 .. code-block:: python
 
-    from translitua import translitua
+    from translitua import translit
 
-    translitua(
+    translit(
         u"""Берег моря. Чути розбещенi крики морських птахiв, ревiння моржа,
     а також iншi звуки, iздаваємиє різною морською сволотою. Входить Гамлєт,
     вдягнутий в зручну приємну товстовку і такі ж самі парусинові штани.
