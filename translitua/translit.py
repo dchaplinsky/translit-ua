@@ -246,9 +246,9 @@ class UkrainianWWS(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianGOST2010(object):
+class RussianGOST2006(object):
     """
-    According to GOST 2010 system from
+    According to GOST 2006 system from
     https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     """
 
@@ -787,10 +787,10 @@ class UkrainianPassport2004Alt(object):
                           u'|'.join(FIRST_CHARACTERS.keys()) + u")")
 
 
-class RussianIKAO(object):
+class RussianICAO(object):
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
-    (Doc 9303, IKAO)
+    (Doc 9303, ICAO)
     """
 
     _MAIN_TRANSLIT_TABLE = {
@@ -1017,7 +1017,7 @@ ALL_UKRAINIAN = [
 ]
 
 ALL_RUSSIAN = [
-    RussianSimple, RussianGOST2010, RussianIKAO, RussianTelegram,
+    RussianSimple, RussianGOST2006, RussianICAO, RussianTelegram,
     RussianInternationalPassport, RussianDriverLicense
 ]
 
@@ -1105,7 +1105,7 @@ __all__ = [
     "ALL_UKRAINIAN", "UkrainianBritish", "UkrainianBGN", "UkrainianISO9",
     "UkrainianFrench", "UkrainianGerman", "UkrainianGOST1971",
     "UkrainianGOST1986", "UkrainianPassport2007", "UkrainianNational1996",
-    "UkrainianPassport2004Alt", "RussianIKAO", "ALL_TRANSLITERATIONS",
+    "UkrainianPassport2004Alt", "RussianICAO", "ALL_TRANSLITERATIONS",
     "RussianTelegram", "RussianInternationalPassport", "RussianDriverLicense"]
 
 
