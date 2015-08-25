@@ -37,7 +37,7 @@ Installation
 ==================================
 Install from PyPI.
 
-.. code-block:: none
+.. code-block:: bash
 
     $ pip install translitua
 
