@@ -47,6 +47,7 @@ Usage
 .. code-block:: python
 
     >>> from translitua import translit, RussianSimple
+
     >>> translit(
         u"""Берег моря. Чути розбещенi крики морських птахiв, ревiння моржа,
     а також iншi звуки, iздаваємиє різною морською сволотою. Входить Гамлєт,
@@ -55,6 +56,7 @@ Usage
     Він босий, бородатий і пацаватий. В руках у нього дебелий дрючок.
     """)
     u'Bereh moria. Chuty rozbeshcheni kryky morskykh ptakhiv, revinnia morzha,\na takozh inshi zvuky, izdavaiemyie riznoiu morskoiu svolotoiu. Vkhodyt Hamliet,\nvdiahnutyi v zruchnu pryiemnu tovstovku i taki zh sami parusynovi shtany.\nHamliet krasyvo pidperezanyi vuzenkym shkirianym poiaskom.\nVin bosyi, borodatyi i patsavatyi. V rukakh u noho debelyi driuchok.\n'
+
     >>> translit(
         u"""Не выходи из комнаты, не совершай ошибку.
     Зачем тебе Солнце, если ты куришь Шипку?
