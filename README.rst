@@ -18,8 +18,20 @@ Translit-ua has 13 transliteration tables for Ukrainian language:
 - UkrainianNational1996 (Codified by Committee on Issues of Legal Terminology in 1996)
 - UkrainianPassport2004Alt (Yet another alternative that was sometimes used in Ukrainian passport in 2004-2007)
 
+Translit-ua also has 6 transliteration tables for Russian language:
 
-Translit-ua works with python 2.6+ and python 3+ and has doctests.
+- RussianGOST2006 (The Russian Federations's GOST from 2006)
+- RussianSimple (Simple one)
+- RussianICAO (DOC9303 from ICAO, International Civil Aviation Organization)
+- RussianTelegram (Russian standard for international telegrams from 2001)
+- RussianInternationalPassport (One that was used for international passports 1997-2010)
+- RussianDriverLicense (One that is used for driver licenses since 2000)
+
+The minor difference in those tables is that common apostrophe sign ' is used in every table.
+
+For convinience all ukrainian tables are listed in ALL_UKRAINIAN variable and all russian tables are listed in ALL_RUSSIAN variable. In ALL_TRANSLITERATIONS variable you might find the full list of tables.
+
+Translit-ua works with python 2.6+ and python 3+ and has good doctests coverage.
 
 Installation
 ==================================
@@ -34,7 +46,7 @@ Usage
 
 .. code-block:: python
 
-    from translitua import translit
+    from translitua import translit, RussianSimple
 
     translit(
         u"""Берег моря. Чути розбещенi крики морських птахiв, ревiння моржа,
@@ -44,6 +56,12 @@ Usage
     Він босий, бородатий і пацаватий. В руках у нього дебелий дрючок.
     """)
 
+    translit(
+        u"""Не выходи из комнаты, не совершай ошибку.
+    Зачем тебе Солнце, если ты куришь Шипку?
+    За дверью бессмысленно все, особенно - возглас счастья.
+    Только в уборную - и сразу же возвращайся.""", RussianSimple
+    )
 
 
 More about `Ukrainian transliteration`_
