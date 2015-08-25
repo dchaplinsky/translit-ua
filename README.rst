@@ -46,23 +46,22 @@ Usage
 
 .. code-block:: python
 
-    from translitua import translit, RussianSimple
-
-    translit(
+    >>> from translitua import translit, RussianSimple
+    >>> translit(
         u"""Берег моря. Чути розбещенi крики морських птахiв, ревiння моржа,
     а також iншi звуки, iздаваємиє різною морською сволотою. Входить Гамлєт,
     вдягнутий в зручну приємну товстовку і такі ж самі парусинові штани.
     Гамлєт красиво підперезаний вузеньким шкіряним пояском.
     Він босий, бородатий і пацаватий. В руках у нього дебелий дрючок.
     """)
-
-    translit(
+    u'Bereh moria. Chuty rozbeshcheni kryky morskykh ptakhiv, revinnia morzha,\na takozh inshi zvuky, izdavaiemyie riznoiu morskoiu svolotoiu. Vkhodyt Hamliet,\nvdiahnutyi v zruchnu pryiemnu tovstovku i taki zh sami parusynovi shtany.\nHamliet krasyvo pidperezanyi vuzenkym shkirianym poiaskom.\nVin bosyi, borodatyi i patsavatyi. V rukakh u noho debelyi driuchok.\n'
+    >>> translit(
         u"""Не выходи из комнаты, не совершай ошибку.
     Зачем тебе Солнце, если ты куришь Шипку?
     За дверью бессмысленно все, особенно - возглас счастья.
     Только в уборную - и сразу же возвращайся.""", RussianSimple
     )
-
+    u"Ne vyhodi iz komnaty, ne sovershaj oshibku.\nZachem tebe Solntse, esli ty kurish' Shipku?\nZa dver'ju bessmyslenno vse, osobenno - vozglas schast'ja.\nTol'ko v ubornuju - i srazu zhe vozvraschajsja."
 
 More about `Ukrainian transliteration`_
 
