@@ -1101,7 +1101,7 @@ translitua = translit
 
 __all__ = [
     "translit", "translitua", "UkrainianKMU", "UkrainianSimple",
-    "UkrainianWWS", "RussianGOST2010", "RussianSimple", "ALL_RUSSIAN",
+    "UkrainianWWS", "RussianGOST2006", "RussianSimple", "ALL_RUSSIAN",
     "ALL_UKRAINIAN", "UkrainianBritish", "UkrainianBGN", "UkrainianISO9",
     "UkrainianFrench", "UkrainianGerman", "UkrainianGOST1971",
     "UkrainianGOST1986", "UkrainianPassport2007", "UkrainianNational1996",
