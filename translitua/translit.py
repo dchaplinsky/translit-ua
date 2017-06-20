@@ -86,11 +86,16 @@ class UkrainianKMU(object):
         u"ч": u"ch",
         u"ш": u"sh",
         u"щ": u"shch",
-        u"ь": u"",
         u"ю": u"iu",
         u"я": u"ia",
-        u"'": u""
     }
+
+    _DELETE_CASES = [
+        u"ь",
+        u"\u0027",
+        u"\u2019",
+        u"\u02BC",
+    ]
 
     _SPECIAL_CASES = {
         u"зг": u"zgh",
@@ -112,6 +117,7 @@ class UkrainianKMU(object):
     PATTERN1 = re.compile(u"(?mu)" + u'|'.join(SPECIAL_CASES.keys()))
     PATTERN2 = re.compile(u"(?mu)" + r"\b(" +
                           u'|'.join(FIRST_CHARACTERS.keys()) + u")")
+    DELETE_PATTERN = re.compile(u"(?mu)" + u'|'.join(_DELETE_CASES))
 
 
 class UkrainianSimple(object):
@@ -241,7 +247,9 @@ class UkrainianWWS(object):
         u"ь": u"ʹ",
         u"ю": u"ju",
         u"я": u"ja",
-        u"'": u"",
+        u"\u0027": u"",
+        u"\u2019": u"",
+        u"\u02BC": u"",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -332,7 +340,9 @@ class UkrainianBritish(object):
         u"ь": u"",
         u"ю": u"yu",
         u"я": u"ya",
-        u"'": u"",
+        u"\u0027": u"",
+        u"\u2019": u"",
+        u"\u02BC": u"",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -378,7 +388,6 @@ class UkrainianBGN(object):
         u"ь": u"'",
         u"ю": u"yu",
         u"я": u"ya",
-        u"'": u"'",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -424,7 +433,6 @@ class UkrainianISO9(object):
         u"ь": u"′",
         u"ю": u"û",
         u"я": u"â",
-        u"'": u"'",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -470,7 +478,9 @@ class UkrainianFrench(object):
         u"ь": u"",
         u"ю": u"iou",
         u"я": u"ia",
-        u"'": u"",
+        u"\u0027": u"",
+        u"\u2019": u"",
+        u"\u02BC": u"",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -516,7 +526,9 @@ class UkrainianGerman(object):
         u"ь": u"",
         u"ю": u"ju",
         u"я": u"ja",
-        u"'": u"",
+        u"\u0027": u"",
+        u"\u2019": u"",
+        u"\u02BC": u"",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -562,7 +574,6 @@ class UkrainianGOST1971(object):
         u"ь": u"'",
         u"ю": u"ju",
         u"я": u"ja",
-        u"'": u"'",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -608,7 +619,9 @@ class UkrainianGOST1986(object):
         u"ь": u"'",
         u"ю": u"ju",
         u"я": u"ja",
-        u"'": u"",
+        u"\u0027": u"",
+        u"\u2019": u"",
+        u"\u02BC": u"",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -654,7 +667,9 @@ class UkrainianPassport2007(object):
         u"ь": u"",
         u"ю": u"iu",
         u"я": u"ia",
-        u"'": u"",
+        u"\u0027": u"",
+        u"\u2019": u"",
+        u"\u02BC": u"",
     }
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
@@ -699,7 +714,6 @@ class UkrainianNational1996(object):
         u"ь": u"'",
         u"ю": u"iu",
         u"я": u"ia",
-        u"'": u"'"
     }
 
     _SPECIAL_CASES = {
@@ -763,7 +777,6 @@ class UkrainianPassport2004Alt(object):
         u"ь": u"'",
         u"ю": u"iu",
         u"я": u"ia",
-        u"'": u"'"
     }
 
     _SPECIAL_CASES = {
@@ -1048,6 +1061,27 @@ def translit(src, table=UkrainianKMU):
     Petrenko/Yevhen
     >>> print(translit(u"Євгєн"))
     Yevhien
+    >>> print(translit(u"Яготин"))
+    Yahotyn
+    >>> print(translit(u"Ярошенко"))
+    Yaroshenko
+    >>> print(translit(u"Костянтин"))
+    Kostiantyn
+    >>> print(translit(u"Знам'янка"))
+    Znamianka
+    >>> print(translit(u"Знам’янка"))
+    Znamianka
+    >>> print(translit(u"Знам’янка"))
+    Znamianka
+    >>> print(translit(u"Феодосія"))
+    Feodosiia
+    >>> print(translit(u"Ньютон"))
+    Niuton
+    >>> print(translit(u"піранья"))
+    pirania
+    >>> print(translit(u"кур'єр"))
+    kurier
+
 
     >>> print(translit(u"Дмитро Згуровский", UkrainianSimple))
     Dmytro Zhurovskyj
@@ -1088,13 +1122,15 @@ def translit(src, table=UkrainianKMU):
 
     src = text_type(src)
 
+    if hasattr(table, "DELETE_PATTERN"):
+        src = table.DELETE_PATTERN.sub(u"", src)
+
     if hasattr(table, "PATTERN1"):
         src = table.PATTERN1.sub(lambda x: table.SPECIAL_CASES[x.group()], src)
 
     if hasattr(table, "PATTERN2"):
         src = table.PATTERN2.sub(lambda x: table.FIRST_CHARACTERS[x.group()],
                                  src)
-
     return src.translate(table.MAIN_TRANSLIT_TABLE)
 
 # For backward compatibility
