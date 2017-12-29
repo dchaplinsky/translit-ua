@@ -92,6 +92,7 @@ class UkrainianKMU(object):
 
     _DELETE_CASES = [
         u"ь",
+        u"Ь",
         u"\u0027",
         u"\u2019",
         u"\u02BC",
@@ -1023,6 +1024,7 @@ class RussianDriverLicense(object):
     PATTERN2 = re.compile(u"(?mu)" + r"\b(" +
                           u'|'.join(FIRST_CHARACTERS.keys()) + u")")
 
+
 ALL_UKRAINIAN = [
     UkrainianKMU, UkrainianSimple, UkrainianWWS, UkrainianBritish,
     UkrainianBGN, UkrainianISO9, UkrainianFrench, UkrainianGerman,
@@ -1038,10 +1040,21 @@ ALL_RUSSIAN = [
 ALL_TRANSLITERATIONS = ALL_UKRAINIAN + ALL_RUSSIAN
 
 
-def translit(src, table=UkrainianKMU):
+def translit(src, table=UkrainianKMU, preserve_case=True):
     u""" Transliterates given unicode `src` text
     to transliterated variant according to a given transliteration table.
     Official ukrainian transliteration is used by default
+
+    :param src: string to transliterate
+    :type src: str
+    :param table: transliteration table
+    :type table: transliteration table object
+    :param preserve_case: convert result to uppercase if source is uppercased
+    (see the example below for the difference that flag makes)
+    :type preserve_case: bool
+    :returns: transliterated string
+    :rtype: str
+
 
     >>> print(translit(u"Дмитро Згуровский"))
     Dmytro Zghurovskyi
@@ -1081,7 +1094,10 @@ def translit(src, table=UkrainianKMU):
     pirania
     >>> print(translit(u"кур'єр"))
     kurier
-
+    >>> print(translit(u"ЗГУРОВСЬКИЙ"))
+    ZGHUROVSKYI
+    >>> print(translit(u"ЗГУРОВСЬКИЙ", preserve_case=False))
+    ZGhUROVSKYI
 
     >>> print(translit(u"Дмитро Згуровский", UkrainianSimple))
     Dmytro Zhurovskyj
@@ -1121,6 +1137,7 @@ def translit(src, table=UkrainianKMU):
     """
 
     src = text_type(src)
+    src_is_upper = src.isupper()
 
     if hasattr(table, "DELETE_PATTERN"):
         src = table.DELETE_PATTERN.sub(u"", src)
@@ -1131,7 +1148,13 @@ def translit(src, table=UkrainianKMU):
     if hasattr(table, "PATTERN2"):
         src = table.PATTERN2.sub(lambda x: table.FIRST_CHARACTERS[x.group()],
                                  src)
-    return src.translate(table.MAIN_TRANSLIT_TABLE)
+    res = src.translate(table.MAIN_TRANSLIT_TABLE)
+
+    if src_is_upper and preserve_case:
+        return res.upper()
+    else:
+        return res
+
 
 # For backward compatibility
 translitua = translit
