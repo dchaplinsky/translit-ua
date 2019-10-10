@@ -1022,10 +1022,10 @@ class RussianISO9SystemB(object):
         u"ч": u"ch",
         u"ш": u"sh",
         u"щ": u"shh",
-        u"ъ": u"``",
-        u"ы": u"y`",
-        u"ь": u"`",
-        u"э": u"e`",
+        u"ъ": u"''",
+        u"ы": u"y'",
+        u"ь": u"'",
+        u"э": u"e'",
         u"ю": u"yu",
         u"я": u"ya",
     }
@@ -1034,10 +1034,10 @@ class RussianISO9SystemB(object):
 
     _SPECIAL_CASES = {
         u"це": u"ce",
-        u"цэ": u"ce`",
+        u"цэ": u"ce'",
         u"ци": u"ci",
         u"цё": u"cyo", 
-        u"цы": u"cy`",
+        u"цы": u"cy'",
         u"цю": u"cyu",
         u"ця": u"cya", 
         u"цй": u"cj",
@@ -1082,7 +1082,7 @@ class RussianInternationalPassport1997(object):
         u"ч": u"ch",
         u"ш": u"sh",
         u"щ": u"shch",
-        u"ъ": u"ʺ",
+        u"ъ": u"'",
         u"ы": u"y",
         u"ь": u"",
         u"э": u"e",
@@ -1135,7 +1135,7 @@ class RussianInternationalPassport1997Reduced(object):
         u"ч": u"ch",
         u"ш": u"sh",
         u"щ": u"shch",
-        u"ъ": u"ʺ",
+        u"ъ": u"'",
         u"ы": u"y",
         u"ь": u"",
         u"э": u"e",
@@ -1365,7 +1365,7 @@ def translit(src, table=UkrainianKMU, preserve_case=True):
     >>> print(translit(u"Цёмки", RussianISO9SystemB))
     Cyomki
     >>> print(translit(u"Цыц", RussianISO9SystemB))
-    Cy`cz
+    Cy'cz
     """
 
     src = text_type(src)

@@ -24,8 +24,13 @@ Translit-ua also has 6 transliteration tables for Russian language:
 - RussianSimple (Simple one)
 - RussianICAO (DOC9303 from ICAO, International Civil Aviation Organization)
 - RussianTelegram (Russian standard for international telegrams from 2001)
-- RussianInternationalPassport (One that was used for international passports 1997-2010)
+- RussianInternationalPassport1997 (One that was used for international passports 1997-2010)
+- RussianInternationalPassport1997Reduced (Same as above but with reduction of yy to y)
 - RussianDriverLicense (One that is used for driver licenses since 2000)
+- RussianISOR9Table2 (ISO/R 9 (1968), table 2)
+- RussianISO9SystemA (ISO 9:1995, System A, one with diacritics)
+- RussianISO9SystemB (ISO 9:1995, System B, no diacritics)
+
 
 The minor difference in those tables is that common apostrophe sign ' is used in every table.
 
