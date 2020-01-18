@@ -882,7 +882,7 @@ class RussianISOR9Table2(object):
         u"р": u"r",
         u"с": u"s",
         u"т": u"t",
-        u"у": u"u1",
+        u"у": u"u",
         u"ф": u"f",
         u"х": u"kh",
         u"ц": u"c",
