@@ -15,7 +15,7 @@ setup(
 
     version=translitua.__version__,
 
-    description='Official transliteration for ukrainian language',
+    description='Official transliteration for Ukrainian and russian languages',
     long_description=long_description,
 
     url='https://github.com/dchaplinsky/translit-ua',
@@ -39,6 +39,10 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
 
         'Natural Language :: Ukrainian',
         'Natural Language :: Russian',

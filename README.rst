@@ -1,8 +1,8 @@
 translit-ua
 ===========
 
-Transliteration (romanization, latinization) for ukrainian and russian languages with variety of transliteration tables (including official ones).
-Translit-ua has 13 transliteration tables for Ukrainian language:
+Transliteration (romanization, latinization) for Ukrainian and russian languages with various transliteration tables (including official ones).
+Translit-ua has 13 transliteration tables for the Ukrainian language:
 
 - UkrainianKMU (National 2010, most recent one approved by The Cabinet)
 - UkrainianSimple (Simple one)
@@ -16,25 +16,25 @@ Translit-ua has 13 transliteration tables for Ukrainian language:
 - UkrainianGOST1986 (The Soviet Union's GOST from 1986)
 - UkrainianPassport2007 (Used in Ukrainian passport in 2007-2010)
 - UkrainianNational1996 (Codified by Committee on Issues of Legal Terminology in 1996)
-- UkrainianPassport2004Alt (Yet another alternative that was sometimes used in Ukrainian passport in 2004-2007)
+- UkrainianPassport2004Alt (Yet another alternative that was sometimes used in Ukrainian passports in 2004-2007)
 
-Translit-ua also has 6 transliteration tables for Russian language:
+Translit-ua also has 6 transliteration tables for the russian language:
 
-- RussianGOST2006 (The Russian Federations's GOST from 2006)
+- RussianGOST2006 (The Russian Federation's GOST from 2006)
 - RussianSimple (Simple one)
 - RussianICAO (DOC9303 from ICAO, International Civil Aviation Organization)
 - RussianTelegram (Russian standard for international telegrams from 2001)
 - RussianInternationalPassport1997 (One that was used for international passports 1997-2010)
 - RussianInternationalPassport1997Reduced (Same as above but with reduction of yy to y)
-- RussianDriverLicense (One that is used for driver licenses since 2000)
+- RussianDriverLicense (One that has been used for driver licenses since 2000)
 - RussianISOR9Table2 (ISO/R 9 (1968), table 2)
 - RussianISO9SystemA (ISO 9:1995, System A, one with diacritics)
 - RussianISO9SystemB (ISO 9:1995, System B, no diacritics)
 
 
-The minor difference in those tables is that common apostrophe sign ' is used in every table.
+The minor difference in those tables is that the common apostrophe sign ' is used in every table.
 
-For convinience all ukrainian tables are listed in ALL_UKRAINIAN variable and all russian tables are listed in ALL_RUSSIAN variable. In ALL_TRANSLITERATIONS variable you might find the full list of tables.
+For convenience, all Ukrainian tables are listed in ALL_UKRAINIAN variable, and all russian tables are listed in ALL_RUSSIAN variable. In ALL_TRANSLITERATIONS variable, you might find the complete list of tables.
 
 Translit-ua works with python 2.6+ and python 3+ and has good doctests coverage.
 
