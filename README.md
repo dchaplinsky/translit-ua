@@ -1,5 +1,5 @@
-translit-ua
-===========
+# translit-ua
+
 
 Transliteration (romanization, latinization) for Ukrainian and russian languages with various transliteration tables (including official ones).
 Translit-ua has 13 transliteration tables for the Ukrainian language:
@@ -38,18 +38,17 @@ For convenience, all Ukrainian tables are listed in ALL_UKRAINIAN variable, and 
 
 Translit-ua works with python 2.6+ and python 3+ and has good doctests coverage.
 
-Installation
-==================================
+## Installation
+
 Install from PyPI.
 
-.. code-block:: bash
+```bash
+$ pip install translitua
+```
 
-    $ pip install translitua
+## Usage
 
-Usage
-==================================
-
-.. code-block:: python
+```python
 
     >>> from translitua import translit, RussianSimple
 
@@ -69,11 +68,8 @@ Usage
     Только в уборную - и сразу же возвращайся.""", RussianSimple
     )
     u"Ne vyhodi iz komnaty, ne sovershaj oshibku.\nZachem tebe Solntse, esli ty kurish' Shipku?\nZa dver'ju bessmyslenno vse, osobenno - vozglas schast'ja.\nTol'ko v ubornuju - i srazu zhe vozvraschajsja."
+```
 
-More about `Ukrainian transliteration`_
+More about [Ukrainian transliteration](https://en.wikipedia.org/wiki/Romanization_of_Ukrainian)
 
-More about `Russian transliteration`_
-
-.. _Ukrainian transliteration: http://en.wikipedia.org/wiki/Romanization_of_Ukrainian
-
-.. _Russian transliteration: https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9
+More about [Russian transliteration](https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9)
