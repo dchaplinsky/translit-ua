@@ -18,7 +18,7 @@ Translit-ua has 13 transliteration tables for the Ukrainian language:
 - UkrainianNational1996 (Codified by Committee on Issues of Legal Terminology in 1996)
 - UkrainianPassport2004Alt (Yet another alternative that was sometimes used in Ukrainian passports in 2004-2007)
 
-Translit-ua also has 6 transliteration tables for the russian language:
+Translit-ua also has 10 transliteration tables for the russian language:
 
 - RussianGOST2006 (The Russian Federation's GOST from 2006)
 - RussianSimple (Simple one)
