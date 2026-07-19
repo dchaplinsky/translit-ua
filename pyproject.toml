@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "translitua"
+dynamic = ["version"]
+description = "Official transliteration for Ukrainian and russian languages"
+readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "dchaplinsky", email = "chaplinsky.dmitry@gmail.com"},
+    {name = "enagorny", email = "ideviantik@gmail.com"},
+]
+requires-python = ">=3.9"
+keywords = ["ukrainian", "transliteration", "romanization", "latinization"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Natural Language :: Ukrainian",
+    "Natural Language :: Russian",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+    "Topic :: Text Processing",
+]
+
+[project.urls]
+Homepage = "https://github.com/dchaplinsky/translit-ua"
+Issues = "https://github.com/dchaplinsky/translit-ua/issues"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.setuptools]
+packages = ["translitua"]
+
+[tool.setuptools.package-data]
+translitua = ["py.typed"]
+
+[tool.setuptools.dynamic]
+version = {attr = "translitua.__version__"}

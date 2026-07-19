@@ -1,5 +1,8 @@
 # translit-ua
 
+[![Tests](https://github.com/dchaplinsky/translit-ua/actions/workflows/tests.yml/badge.svg)](https://github.com/dchaplinsky/translit-ua/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/translitua.svg)](https://pypi.org/project/translitua/)
+
 
 Transliteration (romanization, latinization) for Ukrainian and russian languages with various transliteration tables (including official ones).
 Translit-ua has 13 transliteration tables for the Ukrainian language:
@@ -36,7 +39,7 @@ The minor difference in those tables is that the common apostrophe sign ' is use
 
 For convenience, all Ukrainian tables are listed in ALL_UKRAINIAN variable, and all russian tables are listed in ALL_RUSSIAN variable. In ALL_TRANSLITERATIONS variable, you might find the complete list of tables.
 
-Translit-ua works with python 2.6+ and python 3+ and has good doctests coverage.
+Translit-ua works with Python 3.9+ (CPython and PyPy) and has good doctests coverage.
 
 ## Installation
 
@@ -73,3 +76,11 @@ $ pip install translitua
 More about [Ukrainian transliteration](https://en.wikipedia.org/wiki/Romanization_of_Ukrainian)
 
 More about [Russian transliteration](https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9)
+
+## Changelog
+
+**2.0**
+- Modern packaging (`pyproject.toml`), Python 3.9+ only, `py.typed` type hints
+- Dropped Python 2 compatibility shims; behavior and tables unchanged
+- Doctests run on GitHub Actions against CPython 3.9-3.13 and PyPy
+- Releases publish to PyPI from tags via trusted publishing
