@@ -1,8 +1,11 @@
 # translit-ua
 
+[![Tests](https://github.com/dchaplinsky/translit-ua/actions/workflows/tests.yml/badge.svg)](https://github.com/dchaplinsky/translit-ua/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/translitua.svg)](https://pypi.org/project/translitua/)
+
 
 Transliteration (romanization, latinization) for Ukrainian and russian languages with various transliteration tables (including official ones).
-Translit-ua has 13 transliteration tables for the Ukrainian language:
+Translit-ua has 17 transliteration tables for the Ukrainian language:
 
 - UkrainianKMU (National 2010, most recent one approved by The Cabinet)
 - UkrainianSimple (Simple one)
@@ -17,8 +20,14 @@ Translit-ua has 13 transliteration tables for the Ukrainian language:
 - UkrainianPassport2007 (Used in Ukrainian passport in 2007-2010)
 - UkrainianNational1996 (Codified by Committee on Issues of Legal Terminology in 1996)
 - UkrainianPassport2004Alt (Yet another alternative that was sometimes used in Ukrainian passports in 2004-2007)
+- UkrainianDSTU9112A (DSTU 9112:2021 system A with diacritics — the current State Standard of Ukraine, approved 2022, based on modified ISO 9:1995)
+- UkrainianDSTU9112B (DSTU 9112:2021 system B, ASCII digraphs — same standard, goes back to Maksym Vakulenko's 1995 Derzhstandart system)
+- UkrainianALALC (ALA-LC, the American Library Association / Library of Congress standard used in library catalogs, with ligature ties)
+- UkrainianALALCModified (simplified ALA-LC without diacritics, as commonly used in English-language academic publishing)
 
-Translit-ua also has 10 transliteration tables for the russian language:
+Aliases: `UkrainianBGN2019` and `UkrainianUNGEGN` point to `UkrainianKMU` — the 2019 BGN/PCGN agreement and the 2012 UNGEGN resolution both adopted the Ukrainian national (2010) system as-is. The `UkrainianBGN` table is the older 1965 system they superseded.
+
+Translit-ua also has 11 transliteration tables for the russian language:
 
 - RussianGOST2006 (The Russian Federation's GOST from 2006)
 - RussianSimple (Simple one)
@@ -30,13 +39,14 @@ Translit-ua also has 10 transliteration tables for the russian language:
 - RussianISOR9Table2 (ISO/R 9 (1968), table 2)
 - RussianISO9SystemA (ISO 9:1995, System A, one with diacritics)
 - RussianISO9SystemB (ISO 9:1995, System B, no diacritics)
+- RussianALALC (ALA-LC, the American Library Association / Library of Congress standard, with ligature ties)
 
 
 The minor difference in those tables is that the common apostrophe sign ' is used in every table.
 
 For convenience, all Ukrainian tables are listed in ALL_UKRAINIAN variable, and all russian tables are listed in ALL_RUSSIAN variable. In ALL_TRANSLITERATIONS variable, you might find the complete list of tables.
 
-Translit-ua works with python 2.6+ and python 3+ and has good doctests coverage.
+Translit-ua works with Python 3.9+ (CPython and PyPy) and has good doctests coverage.
 
 ## Installation
 
@@ -73,3 +83,12 @@ $ pip install translitua
 More about [Ukrainian transliteration](https://en.wikipedia.org/wiki/Romanization_of_Ukrainian)
 
 More about [Russian transliteration](https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9)
+
+## Changelog
+
+**2.0**
+- New tables: DSTU 9112:2021 systems A and B (the current State Standard of Ukraine, validated against the [uklatn](https://github.com/paiv/uklatn) reference implementation), ALA-LC for Ukrainian (full and simplified) and russian, plus BGN/PCGN 2019 / UNGEGN aliases
+- Modern packaging (`pyproject.toml`), Python 3.9+ only, `py.typed` type hints
+- Dropped Python 2 compatibility shims; behavior and tables unchanged
+- Doctests run on GitHub Actions against CPython 3.9-3.13 and PyPy
+- Releases publish to PyPI from tags via trusted publishing

@@ -1,15 +1,20 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
 import re
-import sys
-
-if sys.version < "3":
-    text_type = unicode
-else:
-    text_type = str
+from typing import Protocol
 
 
-def add_uppercase(table):
+class TransliterationTable(Protocol):
+    """The contract every transliteration table class satisfies.
+
+    ``MAIN_TRANSLIT_TABLE`` is required; tables may additionally define
+    special-case patterns (``PATTERN1``/``SPECIAL_CASES``,
+    ``PATTERN2``/``FIRST_CHARACTERS``, ``DELETE_PATTERN``) which
+    ``translit`` picks up when present.
+    """
+
+    MAIN_TRANSLIT_TABLE: dict
+
+
+def add_uppercase(table: dict) -> dict:
     """
     Extend the table with uppercase options
 
@@ -34,7 +39,7 @@ def add_uppercase(table):
     return orig
 
 
-def convert_table(table):
+def convert_table(table: dict) -> dict:
     """
     >>> print(1072 in convert_table({"а": "a"}))
     True
@@ -49,7 +54,7 @@ def convert_table(table):
     return dict((ord(k), v) for k, v in table.items())
 
 
-class UkrainianKMU(object):
+class UkrainianKMU:
     """
     According to National system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -114,7 +119,7 @@ class UkrainianKMU(object):
     DELETE_PATTERN = re.compile("(?mu)" + "|".join(_DELETE_CASES))
 
 
-class UkrainianSimple(object):
+class UkrainianSimple:
     """
     Borrowed from https://github.com/barseghyanartur/transliterate/blob/master/src/transliterate/contrib/languages/uk/data/python32.py
     by Artur Barseghyan <artur.barseghyan@gmail.com>
@@ -159,7 +164,7 @@ class UkrainianSimple(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianSimple(object):
+class RussianSimple:
     """
     Borrowed from https://github.com/barseghyanartur/transliterate/blob/master/src/transliterate/contrib/languages/ru/data/python32.py
     by Artur Barseghyan <artur.barseghyan@gmail.com>
@@ -204,7 +209,7 @@ class RussianSimple(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianWWS(object):
+class UkrainianWWS:
     """
     According to Scholarly system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -252,7 +257,7 @@ class UkrainianWWS(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianGOST2006(object):
+class RussianGOST2006:
     """
     According to GOST 2006 system from
     https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
@@ -300,7 +305,7 @@ class RussianGOST2006(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianBritish(object):
+class UkrainianBritish:
     """
     According to British system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -348,8 +353,11 @@ class UkrainianBritish(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianBGN(object):
+class UkrainianBGN:
     """
+    Superseded by the 2019 BGN/PCGN agreement, which adopted the 2010
+    national system as-is (see UkrainianBGN2019 / UkrainianKMU).
+
     According to BGN system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
     """
@@ -393,7 +401,7 @@ class UkrainianBGN(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianISO9(object):
+class UkrainianISO9:
     """
     According to ISO9 system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -438,7 +446,7 @@ class UkrainianISO9(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianFrench(object):
+class UkrainianFrench:
     """
     According to French system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -486,7 +494,7 @@ class UkrainianFrench(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianGerman(object):
+class UkrainianGerman:
     """
     According to German system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -534,7 +542,7 @@ class UkrainianGerman(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianGOST1971(object):
+class UkrainianGOST1971:
     """
     According to Gost 1971 system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -579,7 +587,7 @@ class UkrainianGOST1971(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianGOST1986(object):
+class UkrainianGOST1986:
     """
     According to Gost 1986 system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -627,7 +635,7 @@ class UkrainianGOST1986(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianPassport2007(object):
+class UkrainianPassport2007:
     """
     According to Passport 2007 system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -675,7 +683,7 @@ class UkrainianPassport2007(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class UkrainianNational1996(object):
+class UkrainianNational1996:
     """
     According to National 1996 system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -732,7 +740,7 @@ class UkrainianNational1996(object):
     PATTERN2 = re.compile("(?mu)" + r"\b(" + "|".join(FIRST_CHARACTERS.keys()) + ")")
 
 
-class UkrainianPassport2004Alt(object):
+class UkrainianPassport2004Alt:
     """
     According to Passport 2004 system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
@@ -789,7 +797,7 @@ class UkrainianPassport2004Alt(object):
     PATTERN2 = re.compile("(?mu)" + r"\b(" + "|".join(FIRST_CHARACTERS.keys()) + ")")
 
 
-class RussianICAO(object):
+class RussianICAO:
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     (Doc 9303, ICAO)
@@ -838,7 +846,7 @@ class RussianICAO(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianISOR9Table2(object):
+class RussianISOR9Table2:
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     (ISO/R 9 (1968), ГОСТ 16876-71, СТ СЭВ 1362-78, ООН (1987))
@@ -883,7 +891,7 @@ class RussianISOR9Table2(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianTelegram(object):
+class RussianTelegram:
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     (telegrams)
@@ -928,7 +936,7 @@ class RussianTelegram(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianISO9SystemA(object):
+class RussianISO9SystemA:
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     (ISO 9:1995, ГОСТ 7.79-2000 система А)
@@ -973,7 +981,7 @@ class RussianISO9SystemA(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianISO9SystemB(object):
+class RussianISO9SystemB:
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     (ISO 9:1995, ГОСТ 7.79-2000 система B)
@@ -1034,7 +1042,7 @@ class RussianISO9SystemB(object):
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
 
-class RussianInternationalPassport1997(object):
+class RussianInternationalPassport1997:
     """
     According to https://en.wikipedia.org/wiki/Romanization_of_Russian#Transliteration_of_the_names_in_Russian_passports
     (International Passport 1997)
@@ -1087,7 +1095,7 @@ class RussianInternationalPassport1997(object):
     PATTERN1 = re.compile("(?mu)" + "|".join(SPECIAL_CASES.keys()))
 
 
-class RussianInternationalPassport1997Reduced(object):
+class RussianInternationalPassport1997Reduced:
     """
     According to https://en.wikipedia.org/wiki/Romanization_of_Russian#Transliteration_of_the_names_in_Russian_passports
     (International Passport 1997, reduced variant for ий, ый)
@@ -1142,7 +1150,7 @@ class RussianInternationalPassport1997Reduced(object):
     PATTERN1 = re.compile("(?mu)" + "|".join(SPECIAL_CASES.keys()))
 
 
-class RussianDriverLicense(object):
+class RussianDriverLicense:
     """
     According to https://ru.wikipedia.org/wiki/%D0%A2%D1%80%D0%B0%D0%BD%D1%81%D0%BB%D0%B8%D1%82%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F_%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B0%D0%BB%D1%84%D0%B0%D0%B2%D0%B8%D1%82%D0%B0_%D0%BB%D0%B0%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B5%D0%B9#.D0.A1.D1.80.D0.B0.D0.B2.D0.BD.D0.B8.D1.82.D0.B5.D0.BB.D1.8C.D0.BD.D0.B0.D1.8F_.D1.82.D0.B0.D0.B1.D0.BB.D0.B8.D1.86.D0.B0_.D1.81.D0.B8.D1.81.D1.82.D0.B5.D0.BC_.D1.82.D1.80.D0.B0.D0.BD.D1.81.D0.BB.D0.B8.D1.82.D0.B5.D1.80.D0.B0.D1.86.D0.B8.D0.B8
     (Driver license)
@@ -1217,6 +1225,266 @@ class RussianDriverLicense(object):
     PATTERN2 = re.compile("(?mu)" + r"\b(" + "|".join(FIRST_CHARACTERS.keys()) + ")")
 
 
+
+class UkrainianDSTU9112A:
+    """
+    DSTU 9112:2021 (system A, with diacritics), the State Standard of
+    Ukraine for reversible Cyrillic-Latin transliteration, approved in
+    April 2022. Based on a modified ISO 9:1995. In-text letter forms;
+    verified against the uklatn reference implementation
+    (https://github.com/paiv/uklatn). Unlike UkrainianKMU, the standard
+    preserves the apostrophe and transliterates the soft sign. Forward
+    transliteration only, matching the reference implementation on all
+    sequences valid in Ukrainian orthography; for strict lossless
+    round-tripping (including degenerate inputs) use uklatn.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "\u011f",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "je",
+        "ж": "\u017e",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "\u00ef",
+        "й": "j",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "x",
+        "ц": "c",
+        "ч": "\u010d",
+        "ш": "\u0161",
+        "щ": "\u015d",
+        "ь": "j",
+        "ю": "ju",
+        "я": "ja",
+        "\u2019": "'",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+    # The standard separates й from a preceding consonant with an
+    # apostrophe (pid'jom), so that j unambiguously decodes back: plain
+    # j after a consonant is ь, 'j is й
+    SPECIAL_CASES = {"й": "'j", "Й": "'J"}
+    PATTERN1 = re.compile(
+        "(?mu)(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])[йЙ]")
+
+
+class UkrainianDSTU9112B:
+    """
+    DSTU 9112:2021 (system B, ASCII digraphs), the State Standard of
+    Ukraine for reversible Cyrillic-Latin transliteration, approved in
+    April 2022. System B goes back to the transliteration system
+    developed by Maksym Vakulenko for Derzhstandart in 1995. In-text
+    letter forms; verified against the uklatn reference implementation
+    (https://github.com/paiv/uklatn).
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "gh",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "je",
+        "ж": "zh",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "ji",
+        "й": "j",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "c",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ь": "j",
+        "ю": "ju",
+        "я": "ja",
+        "\u2019": "'",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+    # Same consonant-й apostrophe rule as system A
+    SPECIAL_CASES = UkrainianDSTU9112A.SPECIAL_CASES
+    PATTERN1 = UkrainianDSTU9112A.PATTERN1
+
+
+class UkrainianALALC:
+    """
+    ALA-LC romanization for Ukrainian (American Library Association /
+    Library of Congress), used in library catalogs worldwide. Full form,
+    with ligature ties (U+0361) and the soft sign as modifier prime.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "h",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "i\u0361e",
+        "ж": "z\u0361h",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "\u00ef",
+        "й": "\u012d",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "t\u0361s",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ь": "\u02b9",
+        "ю": "i\u0361u",
+        "я": "i\u0361a",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+
+class UkrainianALALCModified:
+    """
+    Simplified ("modified") ALA-LC for Ukrainian: no ligature ties or
+    diacritics, soft sign and apostrophe omitted. Not a formal standard,
+    but the form widely used in English-language academic publishing.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "h",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "ie",
+        "ж": "zh",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "i",
+        "й": "i",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "ts",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ю": "iu",
+        "я": "ia",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+    # Same soft sign + apostrophes removal as UkrainianKMU
+    DELETE_PATTERN = UkrainianKMU.DELETE_PATTERN
+
+
+class RussianALALC:
+    """
+    ALA-LC romanization for russian (American Library Association /
+    Library of Congress), used in library catalogs worldwide. Full form,
+    with ligature ties (U+0361) and modifier primes for the signs.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "g",
+        "д": "d",
+        "е": "e",
+        "ё": "\u00eb",
+        "ж": "zh",
+        "з": "z",
+        "и": "i",
+        "й": "\u012d",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "t\u0361s",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ъ": "\u02ba",
+        "ы": "y",
+        "ь": "\u02b9",
+        "э": "\u0117",
+        "ю": "i\u0361u",
+        "я": "i\u0361a",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+
+# The 2019 BGN/PCGN agreement and the 2012 UNGEGN resolution both adopted
+# the Ukrainian national (KMU 2010) system as-is
+UkrainianBGN2019 = UkrainianKMU
+UkrainianUNGEGN = UkrainianKMU
+
+
 ALL_UKRAINIAN = [
     UkrainianKMU,
     UkrainianSimple,
@@ -1231,6 +1499,10 @@ ALL_UKRAINIAN = [
     UkrainianPassport2007,
     UkrainianNational1996,
     UkrainianPassport2004Alt,
+    UkrainianDSTU9112A,
+    UkrainianDSTU9112B,
+    UkrainianALALC,
+    UkrainianALALCModified,
 ]
 
 ALL_RUSSIAN = [
@@ -1244,6 +1516,7 @@ ALL_RUSSIAN = [
     RussianISO9SystemB,
     RussianISO9SystemA,
     RussianISOR9Table2,
+    RussianALALC,
 ]
 
 # Backward compatibility
@@ -1252,7 +1525,8 @@ RussianInternationalPassport = RussianInternationalPassport1997
 ALL_TRANSLITERATIONS = ALL_UKRAINIAN + ALL_RUSSIAN
 
 
-def translit(src, table=UkrainianKMU, preserve_case=True):
+def translit(src: str, table: type[TransliterationTable] = UkrainianKMU,
+             preserve_case: bool = True) -> str:
     """Transliterates given unicode `src` text
     to transliterated variant according to a given transliteration table.
     Official ukrainian transliteration is used by default
@@ -1361,9 +1635,26 @@ def translit(src, table=UkrainianKMU, preserve_case=True):
     Cyomki
     >>> print(translit(u"Цыц", RussianISO9SystemB))
     Cy'cz
+
+    >>> print(translit("Дмитро Згуровський", UkrainianDSTU9112A))
+    Dmytro Zğurovsjkyj
+    >>> print(translit("Київ, Щастя, підйом", UkrainianDSTU9112A))
+    Kyïv, Ŝastja, pid'jom
+    >>> print(translit("Дмитро Згуровський", UkrainianDSTU9112B))
+    Dmytro Zghurovsjkyj
+    >>> print(translit("Київ, Щастя, підйом", UkrainianDSTU9112B))
+    Kyjiv, Shchastja, pid'jom
+    >>> print(translit("Знам'янка, Щастя", UkrainianALALC))
+    Znam'i͡anka, Shchasti͡a
+    >>> print(translit("Знам'янка, Щастя", UkrainianALALCModified))
+    Znamianka, Shchastia
+    >>> print(translit("Юрий Ёлкин, Эрмитаж", RussianALALC))
+    I͡uriĭ Ëlkin, Ėrmitazh
+    >>> print(translit("Київ", UkrainianBGN2019))
+    Kyiv
     """
 
-    src = text_type(src)
+    src = str(src)
     src_is_upper = src.isupper()
 
     if hasattr(table, "DELETE_PATTERN"):
@@ -1387,6 +1678,7 @@ translitua = translit
 
 __all__ = [
     "translit",
+    "TransliterationTable",
     "translitua",
     "UkrainianKMU",
     "UkrainianSimple",
@@ -1405,6 +1697,13 @@ __all__ = [
     "UkrainianPassport2007",
     "UkrainianNational1996",
     "UkrainianPassport2004Alt",
+    "UkrainianDSTU9112A",
+    "UkrainianDSTU9112B",
+    "UkrainianALALC",
+    "UkrainianALALCModified",
+    "UkrainianBGN2019",
+    "UkrainianUNGEGN",
+    "RussianALALC",
     "RussianICAO",
     "ALL_TRANSLITERATIONS",
     "RussianTelegram",
