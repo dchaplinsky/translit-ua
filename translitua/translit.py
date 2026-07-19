@@ -1,4 +1,17 @@
 import re
+from typing import Protocol
+
+
+class TransliterationTable(Protocol):
+    """The contract every transliteration table class satisfies.
+
+    ``MAIN_TRANSLIT_TABLE`` is required; tables may additionally define
+    special-case patterns (``PATTERN1``/``SPECIAL_CASES``,
+    ``PATTERN2``/``FIRST_CHARACTERS``, ``DELETE_PATTERN``) which
+    ``translit`` picks up when present.
+    """
+
+    MAIN_TRANSLIT_TABLE: dict
 
 
 def add_uppercase(table: dict) -> dict:
@@ -1244,7 +1257,8 @@ RussianInternationalPassport = RussianInternationalPassport1997
 ALL_TRANSLITERATIONS = ALL_UKRAINIAN + ALL_RUSSIAN
 
 
-def translit(src: str, table: type = UkrainianKMU, preserve_case: bool = True) -> str:
+def translit(src: str, table: type[TransliterationTable] = UkrainianKMU,
+             preserve_case: bool = True) -> str:
     """Transliterates given unicode `src` text
     to transliterated variant according to a given transliteration table.
     Official ukrainian transliteration is used by default
@@ -1379,6 +1393,7 @@ translitua = translit
 
 __all__ = [
     "translit",
+    "TransliterationTable",
     "translitua",
     "UkrainianKMU",
     "UkrainianSimple",

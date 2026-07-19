@@ -37,6 +37,10 @@ Issues = "https://github.com/dchaplinsky/translit-ua/issues"
 [project.optional-dependencies]
 test = ["pytest"]
 
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
+testpaths = ["translitua"]
+
 [tool.setuptools]
 packages = ["translitua"]
 
