@@ -355,6 +355,9 @@ class UkrainianBritish:
 
 class UkrainianBGN:
     """
+    Superseded by the 2019 BGN/PCGN agreement, which adopted the 2010
+    national system as-is (see UkrainianBGN2019 / UkrainianKMU).
+
     According to BGN system from
     https://en.wikipedia.org/wiki/Romanization_of_Ukrainian#Tables_of_romanization_systems
     """
@@ -1222,6 +1225,276 @@ class RussianDriverLicense:
     PATTERN2 = re.compile("(?mu)" + r"\b(" + "|".join(FIRST_CHARACTERS.keys()) + ")")
 
 
+
+class UkrainianDSTU9112A:
+    """
+    DSTU 9112:2021 (system A, with diacritics), the State Standard of
+    Ukraine for reversible Cyrillic-Latin transliteration, approved in
+    April 2022. Based on a modified ISO 9:1995. In-text letter forms;
+    verified against the uklatn reference implementation
+    (https://github.com/paiv/uklatn). Unlike UkrainianKMU, the standard
+    preserves the apostrophe and transliterates the soft sign. Forward
+    transliteration only, matching the reference implementation on all
+    sequences valid in Ukrainian orthography; for strict lossless
+    round-tripping (including degenerate inputs) use uklatn.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "\u011f",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "je",
+        "ж": "\u017e",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "\u00ef",
+        "й": "j",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "x",
+        "ц": "c",
+        "ч": "\u010d",
+        "ш": "\u0161",
+        "щ": "\u015d",
+        "ь": "j",
+        "ю": "ju",
+        "я": "ja",
+        "\u2019": "'",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+    # The standard separates й from a preceding consonant with an
+    # apostrophe (pid'jom), so that j unambiguously decodes back: plain
+    # j after a consonant is ь, 'j is й
+    SPECIAL_CASES = {"й": "'j", "Й": "'J"}
+    PATTERN1 = re.compile(
+        "(?mu)(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])[йЙ]")
+
+
+class UkrainianDSTU9112B:
+    """
+    DSTU 9112:2021 (system B, ASCII digraphs), the State Standard of
+    Ukraine for reversible Cyrillic-Latin transliteration, approved in
+    April 2022. System B goes back to the transliteration system
+    developed by Maksym Vakulenko for Derzhstandart in 1995. In-text
+    letter forms; verified against the uklatn reference implementation
+    (https://github.com/paiv/uklatn).
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "gh",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "je",
+        "ж": "zh",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "ji",
+        "й": "j",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "c",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ь": "j",
+        "ю": "ju",
+        "я": "ja",
+        "\u2019": "'",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+    # The standard separates й from a preceding consonant with an
+    # apostrophe (pid'jom), so that j unambiguously decodes back: plain
+    # j after a consonant is ь, 'j is й
+    SPECIAL_CASES = {"й": "'j", "Й": "'J"}
+    PATTERN1 = re.compile(
+        "(?mu)(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])[йЙ]")
+
+
+class UkrainianALALC:
+    """
+    ALA-LC romanization for Ukrainian (American Library Association /
+    Library of Congress), used in library catalogs worldwide. Full form,
+    with ligature ties (U+0361) and the soft sign as modifier prime.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "h",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "i\u0361e",
+        "ж": "z\u0361h",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "\u00ef",
+        "й": "\u012d",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "t\u0361s",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ь": "\u02b9",
+        "ю": "i\u0361u",
+        "я": "i\u0361a",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+
+class UkrainianALALCModified:
+    """
+    Simplified ("modified") ALA-LC for Ukrainian: no ligature ties or
+    diacritics, soft sign and apostrophe omitted. Not a formal standard,
+    but the form widely used in English-language academic publishing.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "h",
+        "ґ": "g",
+        "д": "d",
+        "е": "e",
+        "є": "ie",
+        "ж": "zh",
+        "з": "z",
+        "и": "y",
+        "і": "i",
+        "ї": "i",
+        "й": "i",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "ts",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ю": "iu",
+        "я": "ia",
+    }
+
+    _DELETE_CASES = [
+        "ь",
+        "Ь",
+        "\u0027",
+        "\u2019",
+        "\u02BC",
+    ]
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+    DELETE_PATTERN = re.compile("(?mu)" + "|".join(_DELETE_CASES))
+
+
+class RussianALALC:
+    """
+    ALA-LC romanization for russian (American Library Association /
+    Library of Congress), used in library catalogs worldwide. Full form,
+    with ligature ties (U+0361) and modifier primes for the signs.
+    """
+
+    _MAIN_TRANSLIT_TABLE = {
+        "а": "a",
+        "б": "b",
+        "в": "v",
+        "г": "g",
+        "д": "d",
+        "е": "e",
+        "ё": "\u00eb",
+        "ж": "zh",
+        "з": "z",
+        "и": "i",
+        "й": "\u012d",
+        "к": "k",
+        "л": "l",
+        "м": "m",
+        "н": "n",
+        "о": "o",
+        "п": "p",
+        "р": "r",
+        "с": "s",
+        "т": "t",
+        "у": "u",
+        "ф": "f",
+        "х": "kh",
+        "ц": "t\u0361s",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "shch",
+        "ъ": "\u02ba",
+        "ы": "y",
+        "ь": "\u02b9",
+        "э": "\u0117",
+        "ю": "i\u0361u",
+        "я": "i\u0361a",
+    }
+
+    MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
+
+
+# The 2019 BGN/PCGN agreement and the 2012 UNGEGN resolution both adopted
+# the Ukrainian national (KMU 2010) system as-is
+UkrainianBGN2019 = UkrainianKMU
+UkrainianUNGEGN = UkrainianKMU
+
+
 ALL_UKRAINIAN = [
     UkrainianKMU,
     UkrainianSimple,
@@ -1236,6 +1509,10 @@ ALL_UKRAINIAN = [
     UkrainianPassport2007,
     UkrainianNational1996,
     UkrainianPassport2004Alt,
+    UkrainianDSTU9112A,
+    UkrainianDSTU9112B,
+    UkrainianALALC,
+    UkrainianALALCModified,
 ]
 
 ALL_RUSSIAN = [
@@ -1249,6 +1526,7 @@ ALL_RUSSIAN = [
     RussianISO9SystemB,
     RussianISO9SystemA,
     RussianISOR9Table2,
+    RussianALALC,
 ]
 
 # Backward compatibility
@@ -1367,6 +1645,23 @@ def translit(src: str, table: type[TransliterationTable] = UkrainianKMU,
     Cyomki
     >>> print(translit(u"Цыц", RussianISO9SystemB))
     Cy'cz
+
+    >>> print(translit("Дмитро Згуровський", UkrainianDSTU9112A))
+    Dmytro Zğurovsjkyj
+    >>> print(translit("Київ, Щастя, підйом", UkrainianDSTU9112A))
+    Kyïv, Ŝastja, pid'jom
+    >>> print(translit("Дмитро Згуровський", UkrainianDSTU9112B))
+    Dmytro Zghurovsjkyj
+    >>> print(translit("Київ, Щастя, підйом", UkrainianDSTU9112B))
+    Kyjiv, Shchastja, pid'jom
+    >>> print(translit("Знам'янка, Щастя", UkrainianALALC))
+    Znam'i͡anka, Shchasti͡a
+    >>> print(translit("Знам'янка, Щастя", UkrainianALALCModified))
+    Znamianka, Shchastia
+    >>> print(translit("Юрий Ёлкин, Эрмитаж", RussianALALC))
+    I͡uriĭ Ëlkin, Ėrmitazh
+    >>> print(translit("Київ", UkrainianBGN2019))
+    Kyiv
     """
 
     src = str(src)
@@ -1412,6 +1707,13 @@ __all__ = [
     "UkrainianPassport2007",
     "UkrainianNational1996",
     "UkrainianPassport2004Alt",
+    "UkrainianDSTU9112A",
+    "UkrainianDSTU9112B",
+    "UkrainianALALC",
+    "UkrainianALALCModified",
+    "UkrainianBGN2019",
+    "UkrainianUNGEGN",
+    "RussianALALC",
     "RussianICAO",
     "ALL_TRANSLITERATIONS",
     "RussianTelegram",
