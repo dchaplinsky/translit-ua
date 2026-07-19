@@ -1335,12 +1335,9 @@ class UkrainianDSTU9112B:
 
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
 
-    # The standard separates й from a preceding consonant with an
-    # apostrophe (pid'jom), so that j unambiguously decodes back: plain
-    # j after a consonant is ь, 'j is й
-    SPECIAL_CASES = {"й": "'j", "Й": "'J"}
-    PATTERN1 = re.compile(
-        "(?mu)(?<=[бвгґджзклмнпрстфхцчшщБВГҐДЖЗКЛМНПРСТФХЦЧШЩ])[йЙ]")
+    # Same consonant-й apostrophe rule as system A
+    SPECIAL_CASES = UkrainianDSTU9112A.SPECIAL_CASES
+    PATTERN1 = UkrainianDSTU9112A.PATTERN1
 
 
 class UkrainianALALC:
@@ -1431,16 +1428,9 @@ class UkrainianALALCModified:
         "я": "ia",
     }
 
-    _DELETE_CASES = [
-        "ь",
-        "Ь",
-        "\u0027",
-        "\u2019",
-        "\u02BC",
-    ]
-
     MAIN_TRANSLIT_TABLE = convert_table(add_uppercase(_MAIN_TRANSLIT_TABLE))
-    DELETE_PATTERN = re.compile("(?mu)" + "|".join(_DELETE_CASES))
+    # Same soft sign + apostrophes removal as UkrainianKMU
+    DELETE_PATTERN = UkrainianKMU.DELETE_PATTERN
 
 
 class RussianALALC:
